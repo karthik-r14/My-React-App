@@ -3,11 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      header: "Header From state",
-      content: "Content from state",
+      headerState: "Header From state",
+      contentState: "Content from state",
       data:
         [{
           "id": 1,
@@ -30,8 +31,11 @@ class App extends Component {
   render() {
     return (
       <div className="App App-header">
-        <h2>{this.state.header}</h2>
-        <h2>{this.state.content}</h2>
+        <h2>{this.state.headerState}</h2>
+        <h2>{this.state.contentState}</h2>
+        <h2>{this.props.headerProp}</h2>
+        <h2>{this.props.contentProp}</h2>
+
         <Header />
         <Content />
         <table>
