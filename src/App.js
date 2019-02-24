@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 class App extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class App extends Component {
 
     this.setStateHandler = this.setStateHandler.bind(this);
     this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+    this.findDomNodeHandler = this.findDomNodeHandler.bind(this);
   }
 
   forceUpdateHandler() {
@@ -42,6 +44,12 @@ class App extends Component {
     myArray.push(item);
     this.setState({ myData: myArray })
   };
+
+  findDomNodeHandler() {
+    var myDiv = document.getElementById('myDiv');
+    ReactDOM.findDOMNode(myDiv).style.color = '#FFACEE';
+
+  }
 
   render() {
     return (
@@ -63,6 +71,10 @@ class App extends Component {
           <h4>Random number: {Math.random().toPrecision(3)}</h4>
         </div>
 
+        <div>
+          <button onClick={this.findDomNodeHandler}>Find DOM Node</button>
+          <div id = "myDiv">NODE</div>
+        </div>
 
         <Header />
         <Content />
