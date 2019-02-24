@@ -29,6 +29,11 @@ class App extends Component {
     }
 
     this.setStateHandler = this.setStateHandler.bind(this);
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+  }
+
+  forceUpdateHandler() {
+    this.forceUpdate();
   }
 
   setStateHandler() {
@@ -52,6 +57,13 @@ class App extends Component {
           <button onClick={this.setStateHandler}>Set State</button>
           <h4>State Array: {this.state.myData}</h4>
         </div>
+
+        <div>
+          <button onClick={this.forceUpdateHandler}>Force Update</button>
+          <h4>Random number: {Math.random().toPrecision(3)}</h4>
+        </div>
+
+
         <Header />
         <Content />
         <table>
