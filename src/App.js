@@ -26,9 +26,11 @@ class App extends Component {
             "id": 3,
             "name": "Baz",
             "age": "40"
-          }]
+          }],
+      incrementValue: 0
     }
 
+    this.setNewNumber = this.setNewNumber.bind(this);
     this.setStateHandler = this.setStateHandler.bind(this);
     this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
     this.findDomNodeHandler = this.findDomNodeHandler.bind(this);
@@ -37,6 +39,10 @@ class App extends Component {
 
   forceUpdateHandler() {
     this.forceUpdate();
+  }
+
+  setNewNumber() {
+    this.setState({ incrementValue: this.state.incrementValue + 1 })
   }
 
   setStateHandler() {
@@ -76,6 +82,11 @@ class App extends Component {
           <h3>Bool : {this.props.propBool ? "True" : "False"}</h3>
           <h3>Number : {this.props.propNumber}</h3>
           <h3>String : {this.props.propString}</h3>
+        </div>
+
+        <div>
+          <button onClick={this.setNewNumber()}>INCREMENT</button>
+          <ContentDemo myNumber={this.state.incrementValue}></ContentDemo>
         </div>
 
         <div>
@@ -127,21 +138,6 @@ class Header extends Component {
   }
 }
 
-App.propTypes = {
-  propArray: PropTypes.array.isRequired,
-  propBool: PropTypes.bool.isRequired,
-  propNumber: PropTypes.number,
-  propString: PropTypes.string
-}
-
-App.defaultProps = {
-
-  propArray: [1, 2, 3, 4, 5, 6],
-  propBool: true,
-  propNumber: 18,
-  propString: "I am a human."
-}
-
 class Content extends Component {
   render() {
     return (
@@ -158,6 +154,63 @@ class Content extends Component {
       </div>
     );
   }
+}
+
+class ContentDemo extends Component {
+  componentWillMount() {
+    console.log('Component WILL MOUNT.')
+  }
+
+  componentDidMount() {
+    console.log('Component DID MOUNT.')
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('Component WILL RECEIVE PROPS.');
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    console.log('Component WILL UPDATE')
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('Component DID UPDATE')
+  }
+
+  componentWillUnmount() {
+    console.log('Component WILL UNMOUNT')
+  }
+
+  render() {
+    return (
+     <div>
+       <h3>{this.props.myNumber}</h3>
+     </div>
+    );
+  }
+
+
+}
+
+App.propTypes = {
+  propArray: PropTypes.array.isRequired,
+  propBool: PropTypes.bool.isRequired,
+  propNumber: PropTypes.number,
+  propString: PropTypes.string,
+  myNumber: PropTypes.number
+}
+
+App.defaultProps = {
+
+  propArray: [1, 2, 3, 4, 5, 6],
+  propBool: true,
+  propNumber: 18,
+  propString: "I am a human.",
+  myNumber: 14
 }
 
 class TableRow extends Component {
