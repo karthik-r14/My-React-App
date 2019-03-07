@@ -59,6 +59,7 @@ class App extends Component {
 
   simpleFunc() {
     alert("Hello world");
+    console.log("Print Hello World on console.");
   }
 
   render() {
@@ -94,9 +95,9 @@ class App extends Component {
         <div>
           <div id="myDiv">color</div>
 
-          <input id="Red" type="text" name="Red"></input>
-          <input id="Green" type="text" name="Green"></input>
-          <input id="Blue" type="text" name="Blue"></input>
+          <input id="Red" type="text" name="Red" placeholder="Red"></input>
+          <input id="Green" type="text" name="Green" placeholder="Green"></input>
+          <input id="Blue" type="text" name="Blue" placeholder="Blue"></input>
           <button onClick={this.findDomNodeHandler}>Change color</button>
 
         </div>
@@ -138,7 +139,7 @@ App.defaultProps = {
   propArray: [1, 2, 3, 4, 5, 6],
   propBool: true,
   propNumber: 18,
-  propString: "I am a coder."
+  propString: "I am a human."
 }
 
 class Content extends Component {
