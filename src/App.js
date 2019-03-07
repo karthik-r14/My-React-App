@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       headerState: "Header From state",
       contentState: "Content from state",
-      myData: [],
+      myData: ['Hello'],
       data:
         [{
           "id": 1,
@@ -32,6 +32,7 @@ class App extends Component {
     this.setStateHandler = this.setStateHandler.bind(this);
     this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
     this.findDomNodeHandler = this.findDomNodeHandler.bind(this);
+    this.simpleFunc = this.simpleFunc.bind(this);
   }
 
   forceUpdateHandler() {
@@ -47,8 +48,17 @@ class App extends Component {
 
   findDomNodeHandler() {
     var myDiv = document.getElementById('myDiv');
-    ReactDOM.findDOMNode(myDiv).style.color = '#FFACEE';
+    var red = document.getElementById('Red');
+    var green = document.getElementById('Green');
+    var blue = document.getElementById('Blue');
 
+    ReactDOM.findDOMNode(myDiv).style.color = '#' + red.value
+      + green.value + blue.value;
+
+  }
+
+  simpleFunc() {
+    alert("Hello world");
   }
 
   render() {
@@ -59,8 +69,14 @@ class App extends Component {
         <h2>{this.props.headerProp}</h2>
         <h2>{this.props.contentProp}</h2>
 
-        <h3>Array : {this.props.propArray}</h3>
-        <h3>Bool : {this.props.propBool ? "True" : "False"}</h3>
+        <div className="double">
+          <h1>SAMPLE DATA</h1>
+          <h3>Array : {this.props.propArray}</h3>
+          <h3>Bool : {this.props.propBool ? "True" : "False"}</h3>
+          <h3>Number : {this.props.propNumber}</h3>
+          <h3>String : {this.props.propString}</h3>
+        </div>
+
         <div>
           <button onClick={this.setStateHandler}>Set State</button>
           <h4>State Array: {this.state.myData}</h4>
@@ -72,8 +88,17 @@ class App extends Component {
         </div>
 
         <div>
-          <button onClick={this.findDomNodeHandler}>Find DOM Node</button>
-          <div id = "myDiv">NODE</div>
+          <button onClick={this.simpleFunc}>Show Alert</button>
+        </div>
+
+        <div>
+          <div id="myDiv">color</div>
+
+          <input id="Red" type="text" name="Red"></input>
+          <input id="Green" type="text" name="Green"></input>
+          <input id="Blue" type="text" name="Blue"></input>
+          <button onClick={this.findDomNodeHandler}>Change color</button>
+
         </div>
 
         <Header />
@@ -103,13 +128,17 @@ class Header extends Component {
 
 App.propTypes = {
   propArray: PropTypes.array.isRequired,
-  propBool: PropTypes.bool.isRequired
+  propBool: PropTypes.bool.isRequired,
+  propNumber: PropTypes.number,
+  propString: PropTypes.string
 }
 
 App.defaultProps = {
 
-  propArray: [1, 2, 3, 4, 5],
-  propBool: true
+  propArray: [1, 2, 3, 4, 5, 6],
+  propBool: true,
+  propNumber: 18,
+  propString: "I am a coder."
 }
 
 class Content extends Component {
