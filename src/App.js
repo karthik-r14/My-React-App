@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import TodoList from "./todoList";
 
 class App extends Component {
   constructor() {
@@ -30,20 +31,25 @@ class App extends Component {
       incrementValue: 0
     }
 
-    this.setNewNumber = this.setNewNumber.bind(this);
+    this.setNewNumber = function () {
+      this.setState({ incrementValue: this.state.incrementValue + 1 })
+    };
     this.setStateHandler = this.setStateHandler.bind(this);
     this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
     this.findDomNodeHandler = this.findDomNodeHandler.bind(this);
-    this.simpleFunc = this.simpleFunc.bind(this);
+    this.simpleFunc = function () {
+      alert("Hello world");
+      console.log("Print Hello World on console.");
+    };
   }
 
   forceUpdateHandler() {
     this.forceUpdate();
   }
 
-  setNewNumber() {
-    this.setState({ incrementValue: this.state.incrementValue + 1 })
-  }
+  // setNewNumber() {
+  //   this.setState({ incrementValue: this.state.incrementValue + 1 })
+  // }
 
   setStateHandler() {
     var item = "setState..."
@@ -63,10 +69,10 @@ class App extends Component {
 
   }
 
-  simpleFunc() {
-    alert("Hello world");
-    console.log("Print Hello World on console.");
-  }
+  // simpleFunc() {
+  //   alert("Hello world");
+  //   console.log("Print Hello World on console.");
+  // }
 
   render() {
     return (
@@ -85,7 +91,7 @@ class App extends Component {
         </div>
 
         <div>
-          <button onClick={this.setNewNumber()}>INCREMENT</button>
+          <button onClick={this.setNewNumber}>INCREMENT</button>
           <ContentDemo myNumber={this.state.incrementValue}></ContentDemo>
         </div>
 
@@ -115,6 +121,9 @@ class App extends Component {
 
         <Header />
         <Content />
+        <ContentDemo />
+        <TodoList/>
+
         <table>
           <tbody>
             {this.state.data.map((person, i) => <TableRow key={i}
@@ -187,12 +196,11 @@ class ContentDemo extends Component {
 
   render() {
     return (
-     <div>
-       <h3>{this.props.myNumber}</h3>
-     </div>
+      <div>
+        <h3>{this.props.myNumber}</h3>
+      </div>
     );
   }
-
 
 }
 
@@ -210,7 +218,9 @@ App.defaultProps = {
   propBool: true,
   propNumber: 18,
   propString: "I am a human.",
-  myNumber: 14
+  myNumber: 14,
+  headerProp: "Header Prop",
+  contentProp: "Content Prop"
 }
 
 class TableRow extends Component {
