@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import TodoList from "./todoList";
+import TodoList from "./components/todoList";
 
 class App extends Component {
   constructor() {

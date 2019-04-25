@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
+import TaskRows from "./taskRows";
 
 class TodoList extends Component {
 
   constructor() {
     super()
+    this.handleButtonClick = this.handleButtonClick.bind(this);
     this.state = {
       myTasks: []
     }
-    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   handleButtonClick() {
-    var task = document.getElementById('task');
-    var taskSize = this.state.myTasks.length;
-    var myArray = [];
+    let task = document.getElementById('task');
+
+    if (task.value.toString().trim() === "") {
+      alert("Task should not be empty.Please try again!")
+      return;
+    }
+
+    let taskSize = this.state.myTasks.length;
+    let myArray;
 
     if (taskSize === 0) {
       myArray = [];
     } else {
       myArray = this.state.myTasks.slice();
-      console.log(myArray)
     }
 
     myArray.push(task.value);
@@ -32,22 +38,8 @@ class TodoList extends Component {
         <p>TodoList</p>
         <input id="task" type="text" autoComplete="off" placeholder="Enter your task here" />
         <button onClick={this.handleButtonClick}>Add Task</button>
-        <table>
-          <tbody>
-            {this.state.myTasks.map((task, i) => <TaskRow key={i} data={i, task} />)}
-          </tbody>
-        </table>
+        <TaskRows data={this.state.myTasks} />
       </div>
-    );
-  }
-}
-
-class TaskRow extends Component {
-  render() {
-    return (
-      <tr>
-        <td>{this.props.data}</td>
-      </tr>
     );
   }
 }
