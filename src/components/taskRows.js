@@ -10,21 +10,21 @@ class TaskRows extends Component {
   }
 
   componentWillReceiveProps(props) {
-    var taskArray = this.state.allTasks.slice();
+        var taskArray = this.state.allTasks.slice();
 
-    var deletedTaskSize = this.state.deletedTasks.length;
+        var deletedTaskSize = this.state.deletedTasks.length;
 
-    if (deletedTaskSize === 0) {
-      this.setState({ allTasks: this.props.data });
+        if (deletedTaskSize === 0) {
+          this.setState({ allTasks: this.props.data });
 
-    } else {
-      var deletedTaskArray = this.state.deletedTasks.slice();
-      var index;
-      var activeTasks = [];
-      for (index = 0; index < taskArray.length; ++index) {
-        if (!this.state.deletedTasks.includes(taskArray[index]))
-          activeTasks.push(taskArray[index])
-      }
+        } else {
+          var deletedTaskArray = this.state.deletedTasks.slice();
+          var index;
+          var activeTasks = [];
+          for (index = 0; index < taskArray.length; ++index) {
+            if (!this.state.deletedTasks.includes(taskArray[index]))
+              activeTasks.push(taskArray[index])
+          }
       this.setState({ allTasks: activeTasks });
     }
   }
@@ -36,8 +36,8 @@ class TaskRows extends Component {
     var index;
     var tempArray = [];
     for (index = 0; index < taskArray.length; ++index) {
-      if (!this.state.deletedTasks.includes(taskArray[index]))
-        tempArray.push(taskArray[index])
+      if (!this.state.deletedTasks.includes(taskArray[taskIndex]))
+        tempArray.push(taskArray[taskIndex])
     }
 
     this.setState({ allTasks: tempArray });
